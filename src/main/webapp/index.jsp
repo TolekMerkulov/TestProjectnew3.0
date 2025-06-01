@@ -2,11 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+    <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<h2>Добро пожаловать в систему тестирования</h2>
+<p><a href="login.jsp">Войти</a> | <a href="register.jsp">Зарегистрироваться</a></p>
 </body>
 </html>
