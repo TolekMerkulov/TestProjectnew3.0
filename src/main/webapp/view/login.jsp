@@ -15,12 +15,15 @@
 </head>
 <body>
 <form method="post" action="${pageContext.request.contextPath}/login">
-    <label>Введите логин: <input type="text" name="username" /></label><br/>
-    <label>Введите пароль: <input type="password" name="password" /></label><br/>
-    <c:if test="${not empty error}">
-        <p style="color: red">${error}</p>
-    </c:if>
-    <button type="submit">Войти</button>
+    <fieldset>
+        <label>Введите логин: <input type="text" name="username" /></label><br/>
+        <label>Введите пароль: <input type="password" name="password" /></label><br/>
+        <c:if test="${not empty error}">
+            <p style="color: red">${error}</p>
+        </c:if>
+        <button type="submit">Войти</button>
+    </fieldset>
+
 </form>
 
 

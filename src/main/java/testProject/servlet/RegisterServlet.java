@@ -26,10 +26,15 @@ public class RegisterServlet extends HttpServlet {
             req.getRequestDispatcher("/view/register.jsp").forward(req,resp);
             return;
         }
-        String id = UUID.randomUUID().toString();
-        User newUser = new User(id, username, password, Role.USER);
+        User newUser = User.builder()
+                .id(UUID.randomUUID().toString())
+                .username(username)
+                .password(password)
+                .role(Role.USER)
+                .build();
 
         userRepository.addUser(newUser);
+
         userRepository.saveAllUsers();
 
         resp.sendRedirect(req.getContextPath() + "/view/login.jsp");

@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (user.getPassword().equals(password)) {
-        req.getSession().setAttribute("user", "Успешный вход");
+        req.getSession().setAttribute("user", user);
         resp.sendRedirect(req.getContextPath() + "/view/main.jsp");
 
         } else {
@@ -40,4 +40,5 @@ public class LoginServlet extends HttpServlet {
 
 
     }
+
 }
