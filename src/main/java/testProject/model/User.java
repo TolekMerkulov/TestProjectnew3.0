@@ -8,6 +8,7 @@ public class User {
 
     public User() {}
 
+
     public User(String id, String username, String password, Role role) {
         this.id = id;
         this.username = username;

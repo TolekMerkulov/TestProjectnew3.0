@@ -35,3 +35,4 @@ public class RegisterServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/view/login.jsp");
     }
 }
+

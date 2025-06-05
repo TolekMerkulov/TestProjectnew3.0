@@ -20,6 +20,7 @@ public class UserRepository {
     private static final String USERS_FILE = "data/users.json";
     private final Map<String, User> usersByUsername = new HashMap<>();
 
+
     public UserRepository() {
         loadUsersFromFile();
     }
