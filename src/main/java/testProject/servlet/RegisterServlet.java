@@ -1,6 +1,7 @@
 package testProject.servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import testProject.repository.UserRepository;
 import java.io.IOException;
 import java.util.UUID;
 
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     private final UserRepository userRepository = new UserRepository();
 
@@ -21,16 +23,15 @@ public class RegisterServlet extends HttpServlet {
 
         if (userRepository.findByUsername(username) != null) {
             req.setAttribute("error", "Username is already taken");
-            req.getRequestDispatcher("/register.jsp").forward(req,resp);
+            req.getRequestDispatcher("/view/register.jsp").forward(req,resp);
             return;
-
         }
-        String id = UUID.randomUUID().toString(); // генерируем уникальный ID
+        String id = UUID.randomUUID().toString();
         User newUser = new User(id, username, password, Role.USER);
 
-        userRepository.addUser(newUser); // ты сам пишешь этот метод
-        userRepository.saveAllUsers();   // этот тоже
+        userRepository.addUser(newUser);
+        userRepository.saveAllUsers();
 
-        resp.sendRedirect(req.getContextPath() + "/login.jsp");
+        resp.sendRedirect(req.getContextPath() + "/view/login.jsp");
     }
 }
