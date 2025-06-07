@@ -79,5 +79,6 @@ public class UserDao {
         List<User> list = findAll();
         list.add(user);
         saveAll(list);
+
     }
 }

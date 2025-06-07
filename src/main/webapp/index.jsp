@@ -10,3 +10,4 @@
 <a href="${pageContext.request.contextPath}/view/register.jsp">Зарегистрироваться</a>
 </body>
 </html>
+
