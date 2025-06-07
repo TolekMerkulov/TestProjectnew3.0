@@ -6,4 +6,9 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>dataFolder</param-name>
+        <param-value>/home/you/TestProject-data</param-value>
+    </context-param>
+
 </web-app>
