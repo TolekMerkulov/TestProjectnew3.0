@@ -1,6 +1,7 @@
 package testProject.DAO;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.ServletContext;
 import testProject.model.User;
 import testProject.model.UserList;
 
@@ -16,50 +17,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
-    private static final String USERS_FILE = "data/users.json";
+    private final Path realFilePath;
+
+    public UserDao(ServletContext context) {
+        this.realFilePath = Paths.get(context.getRealPath("/WEB-INF/data/users.json"));
+        ensureFileExistsFromResources();
+    }
 
     public List<User> loadUsers() {
         ObjectMapper mapper = new ObjectMapper();
-        try {
-            Path path = resolvePath();
-            if (Files.exists(path)) {
-                try (InputStream is = Files.newInputStream(path)) {
-                    UserList wrapper = mapper.readValue(is, UserList.class);
-                    return wrapper.getUsers();
-                }
-            } else {
-                System.out.println("Файл users.json не найден — будет создан при первой регистрации");
-            }
+        try (InputStream is = Files.newInputStream(realFilePath)) {
+            return mapper.readValue(is, UserList.class).getUsers();
         } catch (Exception e) {
-            System.err.println("Ошибка при загрузке users.json: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Ошибка при чтении users.json: " + e.getMessage());
+            return new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     public void saveUsers(List<User> users) {
         ObjectMapper mapper = new ObjectMapper();
-        UserList wrapper = new UserList();
-        wrapper.setUsers(users);
-
-        try {
-            Path path = resolvePath();
-            Files.createDirectories(path.getParent());
-            try (OutputStream os = Files.newOutputStream(path)) {
-                mapper.writerWithDefaultPrettyPrinter().writeValue(os, wrapper);
-            }
-            System.out.println("Файл users.json успешно обновлён по пути: " + path);
+        try (OutputStream os = Files.newOutputStream(realFilePath)) {
+            UserList wrapper = new UserList();
+            wrapper.setUsers(users);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(os, wrapper);
+            System.out.println("users.json сохранён: " + realFilePath);
         } catch (Exception e) {
-            System.err.println("Ошибка при сохранении users.json: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Ошибка при записи users.json: " + e.getMessage());
         }
     }
 
-    private Path resolvePath() throws URISyntaxException, IOException {
-        URL resource = getClass().getClassLoader().getResource(USERS_FILE);
-        if (resource != null && resource.getProtocol().equals("file")) {
-            return Paths.get(resource.toURI());
+    private void ensureFileExistsFromResources() {
+        try {
+            if (Files.notExists(realFilePath)) {
+                Files.createDirectories(realFilePath.getParent());
+                URL resource = getClass().getClassLoader().getResource("data/users.json");
+                if (resource == null) {
+                    System.err.println("Шаблон users.json не найден в resources/data/");
+                    return;
+                }
+
+                try (InputStream is = resource.openStream();
+                     OutputStream os = Files.newOutputStream(realFilePath)) {
+                    is.transferTo(os);
+                    System.out.println("users.json скопирован из resources в: " + realFilePath);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Ошибка при копировании шаблона users.json: " + e.getMessage());
         }
-        return Paths.get("src/main/resources", USERS_FILE).toAbsolutePath();
     }
 }

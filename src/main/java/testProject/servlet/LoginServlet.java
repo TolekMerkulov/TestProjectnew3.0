@@ -13,8 +13,12 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private final UserRepository userRepository = new UserRepository();
+    private UserRepository userRepository;
 
+    @Override
+    public void init() {
+        this.userRepository = new UserRepository(getServletContext());
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

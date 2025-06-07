@@ -1,5 +1,6 @@
 package testProject.repository;
 
+import jakarta.servlet.ServletContext;
 import testProject.DAO.UserDao;
 import testProject.model.User;
 
@@ -8,9 +9,10 @@ import java.util.*;
 
 public class UserRepository {
     private final Map<String, User> usersByUsername = new HashMap<>();
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao ;
 
-    public UserRepository() {
+    public UserRepository(ServletContext context) {
+        this.userDao = new UserDao(context);
         loadUsersFromFile();
     }
 
@@ -18,6 +20,7 @@ public class UserRepository {
         List<User> users = userDao.loadUsers();
         for (User user : users) {
             usersByUsername.put(user.getUsername(), user);
+
         }
     }
 
