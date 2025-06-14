@@ -34,9 +34,7 @@
 <a href="myResults.jsp">Мои результаты</a>
 <% } %>
 
-<a href="logout">Выйти</a>
-
-
+<a href="${pageContext.request.contextPath}/logout">Выйти</a>
 </body>
 </html>
 
