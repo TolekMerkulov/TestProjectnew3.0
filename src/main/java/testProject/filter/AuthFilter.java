@@ -11,23 +11,31 @@ import java.io.IOException;
 @WebFilter("/*")
 public class AuthFilter implements Filter {
     @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) resp;
+    public void doFilter(ServletRequest rq, ServletResponse rs, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest  req  = (HttpServletRequest) rq;
+        HttpServletResponse resp = (HttpServletResponse) rs;
 
-        String path = request.getRequestURI().substring(request.getContextPath().length());
+        String path = req.getRequestURI()
+                .substring(req.getContextPath().length());
 
-        if ( path.startsWith("/public/") || path.startsWith("/resources/"))  {
-            chain.doFilter(req, resp);
+        if (       path.isEmpty()
+                || path.equals("/")
+                || path.equals("/index.jsp")
+                || path.startsWith("/public/")
+                || path.equals("/login")
+                || path.equals("/register")   )
+        {
+            chain.doFilter(rq, rs);
             return;
         }
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            resp.sendRedirect(req.getContextPath() + "/public/login.jsp");
             return;
         }
 
-        chain.doFilter(req, resp);
+        chain.doFilter(rq, rs);
     }
 }
