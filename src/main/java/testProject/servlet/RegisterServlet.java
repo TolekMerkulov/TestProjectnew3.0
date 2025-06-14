@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-    private static final String VIEW = "view/register.jsp";
+    private static final String VIEW = "public/register.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
             // MOD: бизнес-логика регистрации (проверка дубликатов, генерация UUID)
             repo.register(username, password);
             // при успешной регистрации — переходим на страницу логина
-            resp.sendRedirect(req.getContextPath() + "/view/login.jsp");
+            resp.sendRedirect(req.getContextPath() + "/public/login.jsp");
         } catch (IllegalArgumentException e) {
             // MOD: ловим ошибку «пользователь уже существует»
             req.setAttribute("error", e.getMessage());

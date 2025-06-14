@@ -14,7 +14,7 @@
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("/public/login.jsp");
         return;
     }
 
@@ -24,6 +24,8 @@
 <h2>Добро пожаловать, <%= username %>!</h2>
 
 <% if ("ADMIN".equals(role)) { %>
+<a href="startTest.jsp">Пройти тест</a><br>
+<a href="myResults.jsp">Мои результаты</a>
 <a href="createTest.jsp">Создать тест</a><br>
 <a href="editTests.jsp">Редактировать тесты</a><br>
 <a href="viewStats.jsp">Посмотреть статистику</a>
@@ -31,6 +33,8 @@
 <a href="startTest.jsp">Пройти тест</a><br>
 <a href="myResults.jsp">Мои результаты</a>
 <% } %>
+
+<a href="logout">Выйти</a>
 
 
 </body>
