@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final String VIEW = "public/login.jsp";

@@ -30,7 +30,7 @@
 <a href="editTests.jsp">Редактировать тесты</a><br>
 <a href="viewStats.jsp">Посмотреть статистику</a>
 <% } else if ("USER".equals(role)) { %>
-<a href="startTest.jsp">Пройти тест</a><br>
+<a href="listTests.jsp">Пройти тест</a><br>
 <a href="myResults.jsp">Мои результаты</a>
 <% } %>
 
