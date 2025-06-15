@@ -28,7 +28,7 @@ public class UserDao {
     }
 
     private File getDataFile() throws IOException {
-        // 1) Выбор внешней папки (как у вас сейчас)
+        // 1) Выбор внешней папки
         String extParam = ctx.getInitParameter("dataFolder");
         File file;
         if (extParam != null && !extParam.isBlank()) {
