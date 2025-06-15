@@ -24,13 +24,13 @@
 <h2>Добро пожаловать, <%= username %>!</h2>
 
 <% if ("ADMIN".equals(role)) { %>
-<a href="startTest.jsp">Пройти тест</a><br>
+<a href="${pageContext.request.contextPath}/listTests">Пройти тест</a>
 <a href="myResults.jsp">Мои результаты</a>
 <a href="createTest.jsp">Создать тест</a><br>
 <a href="editTests.jsp">Редактировать тесты</a><br>
 <a href="viewStats.jsp">Посмотреть статистику</a>
 <% } else if ("USER".equals(role)) { %>
-<a href="listTests.jsp">Пройти тест</a><br>
+<a href="${pageContext.request.contextPath}/listTests">Пройти тест</a>
 <a href="myResults.jsp">Мои результаты</a>
 <% } %>
 
