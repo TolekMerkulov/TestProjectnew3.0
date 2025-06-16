@@ -34,4 +34,11 @@ public class TestRepository {
         }
         return tests;
     }
+
+    public Test findById(String testId) throws IOException {
+        for (Test t : findAllTests()) {
+            if (t.getId().equals(testId)) return t;
+        }
+        return null;
+    }
 }
