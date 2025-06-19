@@ -12,24 +12,24 @@ import java.util.Map;
 
 @WebServlet("/submitTest")
 public class SubmitTestServlet extends HttpServlet {
+    private final TestService testService = new TestService();
 
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
-        String testId = req.getParameter("testId");
+            throws ServletException, IOException {
         TestRepository testRepository = new TestRepository(req.getServletContext());
-        Test test = testRepository.findById(testId);
+        Test test = testRepository.findById(req.getParameter("testId"));
         int questionsCount = test.getQuestions().size();
-        Map<Integer,Integer> answersMap = new HashMap<Integer,Integer>();
+        Map<Integer, Integer> answersMap = new HashMap<Integer, Integer>();
 
         for (int i = 0; i < questionsCount; i++) {
             String answer = req.getParameter("answer" + i);
             Integer userAnswer = Integer.valueOf(answer);
-            answersMap.put(i,userAnswer);
+            answersMap.put(i, userAnswer);
         }
 
-        TestResult result = TestService.evaluate(test, answersMap);
+        TestResult result = testService.evaluate(test, answersMap);
         ResultRepository.save(result);
         req.getRequestDispatcher("/view/result.jsp").forward(req, resp);
 
