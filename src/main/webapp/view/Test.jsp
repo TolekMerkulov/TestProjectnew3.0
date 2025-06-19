@@ -9,8 +9,9 @@
 <html>
 <body>
 <h2>${test.title}</h2>
-<input type="hidden" name="testId" value="${test.id}" />
 <form method="post" action="${pageContext.request.contextPath}/submitTest">
+    <input type="hidden" name="testId" value="${test.id}" />
+
     <c:forEach var="q" items="${test.questions}" varStatus="st">
         <div>
             <p>Вопрос ${st.index + 1}: ${q.text}</p>

@@ -21,7 +21,6 @@ import java.util.List;
 public class UserDao {
     private final ServletContext ctx;
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final String INWAR_REL = "/WEB-INF/data/users.json";
 
     public UserDao(ServletContext ctx) {
         this.ctx = ctx;

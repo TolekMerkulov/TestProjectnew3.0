@@ -1,5 +1,6 @@
 package testProject.tests;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ public class SubmitTestServlet extends HttpServlet {
     private final TestService testService = new TestService();
 
 
+
+
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -28,9 +31,10 @@ public class SubmitTestServlet extends HttpServlet {
             Integer userAnswer = Integer.valueOf(answer);
             answersMap.put(i, userAnswer);
         }
-
         TestResult result = testService.evaluate(test, answersMap);
-        ResultRepository.save(result);
+        ResultRepository resultRepository = new ResultRepository(req.getServletContext());
+        resultRepository.save(result);
+        req.setAttribute("result", result);
         req.getRequestDispatcher("/view/result.jsp").forward(req, resp);
 
     }
