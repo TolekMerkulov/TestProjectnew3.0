@@ -28,8 +28,13 @@
     </div>
     <hr/>
 </c:forEach>
+
 <p>Всего вопросов: ${r.totalQuestions}</p>
 <p>Правильных ответов: ${r.correctCount}</p>
-
+<p>
+    <a href="${pageContext.request.contextPath}/view/main.jsp">Вернуться на главную</a>
+    |
+    <a href="${pageContext.request.contextPath}/listTests">К списку тестов</a>
+</p>
 </body>
 </html>

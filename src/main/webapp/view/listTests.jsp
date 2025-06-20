@@ -25,6 +25,9 @@ ${error}
 
 </c:forEach>
 <c:out value="${t.title}" />
+<p>
+    <a href="${pageContext.request.contextPath}/view/main.jsp">Вернуться на главную</a>
+</p>
 
 
 </body>
