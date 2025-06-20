@@ -22,6 +22,7 @@ public class SubmitTestServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        ServletContext ctx = getServletContext();
         TestRepository testRepository = new TestRepository(req.getServletContext());
         Test test = testRepository.findById(req.getParameter("testId"));
         int questionsCount = test.getQuestions().size();
@@ -36,6 +37,7 @@ public class SubmitTestServlet extends HttpServlet {
         String username = user.getUsername();
 
         TestResult result = testService.evaluate(test, answersMap,username);
+        ctx.log("Saving result for user=" + username);
         ResultRepository resultRepository = new ResultRepository(req.getServletContext());
         resultRepository.save(result);
         req.setAttribute("result", result);

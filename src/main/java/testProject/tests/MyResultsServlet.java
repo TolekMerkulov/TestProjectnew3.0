@@ -20,6 +20,7 @@ public class MyResultsServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         String username = req.getParameter("username");
+        ServletContext ctx = getServletContext();
 
         ResultRepository resultRepository = new ResultRepository(req.getServletContext());
         List<TestResult> all = resultRepository.findAll();
@@ -27,6 +28,7 @@ public class MyResultsServlet extends HttpServlet {
                 .filter(r -> r.getUsername().equals(username))
                 .collect(Collectors.toList());
         req.setAttribute("results", mine);
+        ctx.log("Filtering for user=" + username);
         req.getRequestDispatcher("/view/myResults.jsp").forward(req, resp);
     }
 }
