@@ -20,5 +20,6 @@ public class TestResult {
     int correctCount;
     private String userId;
     private LocalDateTime timestamp;
+    private String username;
 
 }

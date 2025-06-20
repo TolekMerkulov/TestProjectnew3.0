@@ -2,6 +2,8 @@ package testProject.tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.ServletContext;
 import testProject.model.User;
 
@@ -13,13 +15,19 @@ import java.util.List;
 
 public class ResultRepository {
     private final ServletContext ctx;
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
+
+
 
     public ResultRepository(ServletContext ctx) {
         this.ctx = ctx;
+        this.mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
     private File getResultFile() throws IOException {
+
         String extParam = ctx.getInitParameter("resultFolder");
         File file;
         if (extParam != null && !extParam.isBlank()) {
@@ -43,7 +51,8 @@ public class ResultRepository {
         if (!file.exists()) {
             try (InputStream is = ctx.getResourceAsStream("/WEB-INF/data/result.json")) {
                 if (is != null) {
-                    List<TestResult> defaults = mapper.readValue(is, new TypeReference<List<TestResult>>(){});
+                    List<TestResult> defaults = mapper.readValue(is, new TypeReference<List<TestResult>>() {
+                    });
                     mapper.writeValue(file, defaults);
                 } else {
                     mapper.writeValue(file, new ArrayList<TestResult>());
@@ -53,11 +62,18 @@ public class ResultRepository {
         return file;
     }
 
-    public  void save(TestResult result) throws IOException {
+    public void save(TestResult result) throws IOException {
         List<TestResult> list = mapper.readValue(getResultFile(),
-                new TypeReference<List<TestResult>>(){});
+                new TypeReference<List<TestResult>>() {
+                });
         list.add(result);
-        mapper.writeValue(getResultFile(),list);
+        mapper.writeValue(getResultFile(), list);
 
     }
+
+    public List<TestResult> findAll() throws IOException {
+        return mapper.readValue(getResultFile(), new TypeReference<List<TestResult>>() {
+        });
+    }
 }
+

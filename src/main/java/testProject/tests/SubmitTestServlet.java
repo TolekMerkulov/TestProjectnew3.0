@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import testProject.model.User;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,7 +32,10 @@ public class SubmitTestServlet extends HttpServlet {
             Integer userAnswer = Integer.valueOf(answer);
             answersMap.put(i, userAnswer);
         }
-        TestResult result = testService.evaluate(test, answersMap);
+        User user = (User) req.getSession().getAttribute("user");
+        String username = user.getUsername();
+
+        TestResult result = testService.evaluate(test, answersMap,username);
         ResultRepository resultRepository = new ResultRepository(req.getServletContext());
         resultRepository.save(result);
         req.setAttribute("result", result);
