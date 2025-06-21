@@ -1,4 +1,4 @@
-package testProject.tests;
+package testProject.tests.servlet;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import testProject.model.User;
+import testProject.tests.model.Test;
+import testProject.tests.model.TestResult;
+import testProject.tests.repository.ResultRepository;
+import testProject.tests.repository.TestRepository;
+import testProject.tests.service.TestService;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -29,12 +29,11 @@
         <td><c:out value="${r.testTitle}" /></td>
 
         <td>
-          <fmt:formatDate value="${r.timestamp}"
-                          pattern="yyyy-MM-dd HH:mm" />
+          <fmt:formatDate value="${r.timestampAsDate}" pattern="yyyy-MM-dd HH:mm" />
         </td>
 
         <td>
-          <a href="${pageContext.request.contextPath}/viewResult?index=${st.index}">
+          <a href="${pageContext.request.contextPath}/viewResult?resultId=${r.resultId}">
             Посмотреть результат
           </a>
         </td>

@@ -25,13 +25,13 @@
 
 <% if ("ADMIN".equals(role)) { %>
 <a href="${pageContext.request.contextPath}/listTests">Пройти тест</a>
-<a href="myResults.jsp">Мои результаты</a>
+<a href="${pageContext.request.contextPath}/myResults">Мои результаты</a>
 <a href="createTest.jsp">Создать тест</a><br>
 <a href="editTests.jsp">Редактировать тесты</a><br>
 <a href="viewStats.jsp">Посмотреть статистику</a>
 <% } else if ("USER".equals(role)) { %>
 <a href="${pageContext.request.contextPath}/listTests">Пройти тест</a>
-<a href="myResults.jsp">Мои результаты</a>
+<a href="${pageContext.request.contextPath}/myResults">Мои результаты</a>
 <% } %>
 
 <a href="${pageContext.request.contextPath}/logout">Выйти</a>

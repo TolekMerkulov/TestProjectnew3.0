@@ -1,9 +1,15 @@
-package testProject.tests;
+package testProject.tests.service;
+
+import testProject.tests.model.Question;
+import testProject.tests.model.QuestionResult;
+import testProject.tests.model.Test;
+import testProject.tests.model.TestResult;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class TestService {
     public TestResult evaluate(Test test, Map<Integer, Integer> answersMap, String username) {
@@ -35,6 +41,7 @@ public class TestService {
                 .totalQuestions(test.getQuestions().size())
                 .correctCount(correctCount)
                 .timestamp(LocalDateTime.now())
+                .resultId(UUID.randomUUID().toString())
                 .username(username)
                 .build();
     }

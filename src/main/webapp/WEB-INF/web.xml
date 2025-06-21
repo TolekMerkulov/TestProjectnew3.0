@@ -10,5 +10,9 @@
         <param-name>dataFolder</param-name>
         <param-value>/home/you/TestProject-data</param-value>
     </context-param>
+    <context-param>
+        <param-name>resultFolder</param-name>
+        <param-value>/home/you/TestProject-data</param-value>
+    </context-param>
 
 </web-app>
