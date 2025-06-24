@@ -1,4 +1,4 @@
-package testProject.tests.servlet;
+package testProject.tests.servlet.user;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,6 @@ import testProject.tests.repository.ResultRepository;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/myResults")
 public class MyResultsServlet extends HttpServlet {

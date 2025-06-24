@@ -1,4 +1,4 @@
-package testProject.tests.servlet;
+package testProject.tests.servlet.user;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
