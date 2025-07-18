@@ -7,27 +7,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
+    private static final List<String> EXCLUDED = List.of(
+            "/index.jsp", "/public/login.jsp", "/public/register.jsp",
+            "/css/", "/js/", "/images/"
+    );
     @Override
     public void doFilter(ServletRequest rq, ServletResponse rs, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest  req  = (HttpServletRequest) rq;
         HttpServletResponse resp = (HttpServletResponse) rs;
+        String uri = req.getRequestURI().substring(req.getContextPath().length());
 
-        String path = req.getRequestURI()
-                .substring(req.getContextPath().length());
-
-        if (       path.isEmpty()
-                || path.equals("/")
-                || path.equals("/index.jsp")
-                || path.startsWith("/public/")
-                || path.equals("/login")
-                || path.equals("/register")
-                || path.equals("/logout")
-        )
-        {
+        boolean ok = EXCLUDED.stream().anyMatch(uri::startsWith);
+        if (ok) {
             chain.doFilter(rq, rs);
             return;
         }
