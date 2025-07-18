@@ -27,6 +27,9 @@ public class TestResult {
     private LocalDateTime timestamp;
     private String username;
     private String resultId;
+    public int getTotalCount() {
+        return this.totalQuestions;
+    }
 
     public Date getTimestampAsDate() {
         return Date.from(timestamp.atZone(ZoneId.systemDefault()).toInstant());

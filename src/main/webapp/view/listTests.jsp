@@ -21,7 +21,7 @@
 </c:if>
 <c:if test="${userRole == 'ADMIN'}">
     <p>
-        <a href="${pageContext.request.contextPath}/admin/tests/new">
+        <a href="${pageContext.request.contextPath}/admin/tests/count">
             Создать новый тест
         </a>
     </p>

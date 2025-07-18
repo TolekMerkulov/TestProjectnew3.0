@@ -26,7 +26,7 @@
 <% if ("ADMIN".equals(role)) { %>
 <a href="${pageContext.request.contextPath}/listTests">Пройти тест</a>
 <a href="${pageContext.request.contextPath}/myResults">Мои результаты</a>
-<a href="viewStats.jsp">Посмотреть статистику</a>
+<a href="${pageContext.request.contextPath}/admin/users">Статистика и пользователи</a>
 <% } else if ("USER".equals(role)) { %>
 <a href="${pageContext.request.contextPath}/listTests">Пройти тест</a>
 <a href="${pageContext.request.contextPath}/myResults">Мои результаты</a>

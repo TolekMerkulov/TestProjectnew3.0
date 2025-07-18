@@ -16,7 +16,7 @@ public class DeleteTestServlet extends HttpServlet {
             throws ServletException, IOException {
         String id = req.getParameter("testId");
         if (id != null) {
-            new TestRepository(getServletContext()).deleteById(id);
+            new TestRepository(req.getServletContext()).delete(id);
         }
         resp.sendRedirect(req.getContextPath() + "/admin/tests");
     }

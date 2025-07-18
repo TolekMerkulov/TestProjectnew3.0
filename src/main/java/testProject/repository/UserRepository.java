@@ -47,5 +47,8 @@ public class UserRepository {
         return findByUsername(username)
                 .filter(u -> u.getPassword().equals(password));
     }
+
+    public UserDao getDao() { return dao; }
+
 }
 

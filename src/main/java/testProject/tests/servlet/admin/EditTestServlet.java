@@ -30,6 +30,8 @@ public class EditTestServlet extends HttpServlet {
         }
         req.setAttribute("mode", "edit");
         req.setAttribute("test", test);
+        req.setAttribute("count", test.getQuestions().size());
+
         req.getRequestDispatcher("/view/admin/testForm.jsp")
                 .forward(req, resp);
     }
@@ -56,6 +58,6 @@ public class EditTestServlet extends HttpServlet {
         Test test = new Test(id, title, qs);
         new TestRepository(getServletContext()).save(test);
 
-        resp.sendRedirect(req.getContextPath() + "/admin/tests");
+        resp.sendRedirect(req.getContextPath() + "/admin/tests?msg=updated");
     }
 }

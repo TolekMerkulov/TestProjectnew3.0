@@ -20,8 +20,7 @@
   </c:choose>
 </h2>
 
-<form method="post"
-      action="${pageContext.request.contextPath}/admin/tests/${mode=='create' ? 'new' : 'edit'}">
+<form method="post" action="${pageContext.request.contextPath}/admin/tests/${mode=='create' ? 'create' : 'edit'}">
   <input type="hidden" name="count" value="${count}"/>
   <input type="hidden" name="testId"  value="${test.id}"/>
   <label>Заголовок:<br/>

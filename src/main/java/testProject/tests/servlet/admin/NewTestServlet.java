@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@WebServlet("/admin/tests/new")
+@WebServlet("/admin/tests/create")
 public class NewTestServlet extends HttpServlet {
 
     @Override

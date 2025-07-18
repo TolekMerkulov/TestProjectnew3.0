@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html><head><title>Новый тест</title></head><body>
 <h2>Создать новый тест</h2>
-<form method="get" action="${pageContext.request.contextPath}/admin/tests/new">
+<form method="get" action="${pageContext.request.contextPath}/admin/tests/count">
   <label>Сколько вопросов?<br/>
     <input type="number" name="count" min="1" max="50" value="5" required/>
   </label><br/><br/>

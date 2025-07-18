@@ -13,8 +13,16 @@ import java.util.List;
 @WebFilter("/*")
 public class AuthFilter implements Filter {
     private static final List<String> EXCLUDED = List.of(
-            "/index.jsp", "/public/login.jsp", "/public/register.jsp",
-            "/css/", "/js/", "/images/"
+            "/index.jsp",
+            "/public/login.jsp",
+            "/public/register.jsp",
+
+            "/login",
+            "/register",
+
+            "/css/",
+            "/js/",
+            "/images/"
     );
     @Override
     public void doFilter(ServletRequest rq, ServletResponse rs, FilterChain chain)
