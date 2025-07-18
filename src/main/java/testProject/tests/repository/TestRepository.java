@@ -42,4 +42,10 @@ public class TestRepository {
         }
         return null;
     }
+
+    public void deleteById(String id) throws IOException {
+        File dir = new File(ctx.getRealPath("/WEB-INF/data/tests"));
+        File f = new File(dir, id + ".json");
+        if (f.exists()) f.delete();
+    }
 }
